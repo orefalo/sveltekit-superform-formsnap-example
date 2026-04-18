@@ -1,0 +1,29 @@
+import type { Actions } from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
+import { setError, superValidate } from 'sveltekit-superforms';
+import { zod } from 'sveltekit-superforms/adapters';
+import { userSchema } from '$lib/schema';
+
+export const load = async () => {
+  const form = await superValidate(zod(userSchema));
+  return { form };
+};
+
+export const actions: Actions = {
+  default: async ({ request }) => {
+    const form = await superValidate(request, zod(userSchema));
+
+    if (!form.valid) {
+      return fail(400, { form });
+    }
+
+    if (form.data.password !== form.data.confirmPassword) {
+      return setError(form, 'confirmPassword', "Passwords don't match");
+    }
+
+    // All data is valid — do your thing (DB insert, auth, etc.)
+    console.log('Valid data:', form.data);
+
+    return { form };
+  }
+};

@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "Bash(npx svelte-kit *)",
+      "Bash(pnpm add *)",
+      "Bash(npm install *)"
+    ]
+  }
+}
