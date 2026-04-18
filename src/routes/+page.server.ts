@@ -1,7 +1,7 @@
 import type { Actions } from '@sveltejs/kit';
 import { fail } from '@sveltejs/kit';
 import { setError, superValidate } from 'sveltekit-superforms';
-import { valibot, valibotClient } from 'sveltekit-superforms/adapters';
+import { valibot } from 'sveltekit-superforms/adapters';
 import { userSchema } from '$lib/schema';
 
 export const load = async () => {

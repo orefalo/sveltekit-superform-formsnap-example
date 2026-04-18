@@ -1,6 +1,6 @@
 <script lang="ts">
   import { superForm } from "sveltekit-superforms";
-  import { zodClient } from "sveltekit-superforms/adapters";
+  import { valibotClient } from "sveltekit-superforms/adapters";
   import { userSchema } from "$lib/schema";
 
   export let data;
@@ -8,7 +8,7 @@
   const { form, errors, enhance, constraints, submitting, delayed } = superForm(
     data.form,
     {
-      validators: zodClient(userSchema),
+      validators: valibotClient(userSchema),
       validationMethod: "oninput",
       scrollToError: "smooth",
       resetForm: true,
@@ -24,7 +24,7 @@
 <main>
   <h1>Register</h1>
 
-  <form method="POST" use:enhance>
+  <form method="POST" use:enhance novalidate>
     <!-- Name -->
     <div class="field">
       <label for="name">Name</label>
