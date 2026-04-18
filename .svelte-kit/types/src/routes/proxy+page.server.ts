@@ -2,17 +2,17 @@
 import type { Actions } from '@sveltejs/kit';
 import { fail } from '@sveltejs/kit';
 import { setError, superValidate } from 'sveltekit-superforms';
-import { zod } from 'sveltekit-superforms/adapters';
+import { valibot, valibotClient } from 'sveltekit-superforms/adapters';
 import { userSchema } from '$lib/schema';
 
 export const load = async () => {
-  const form = await superValidate(zod(userSchema));
+  const form = await superValidate(valibot(userSchema));
   return { form };
 };
 
 export const actions = {
   default: async ({ request }: import('./$types').RequestEvent) => {
-    const form = await superValidate(request, zod(userSchema));
+    const form = await superValidate(request, valibot(userSchema));
 
     if (!form.valid) {
       return fail(400, { form });

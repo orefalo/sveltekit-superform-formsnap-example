@@ -1,11 +1,11 @@
-import { z } from 'zod';
+import * as v from 'valibot';
 
-export const userSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Please enter a valid email'),
-  age: z.number({ invalid_type_error: 'Age must be a number' }).int().min(18, 'Must be 18 or older'),
-  password: z.string().min(8, 'Password must be at least 8 characters'),
-  confirmPassword: z.string()
+export const userSchema = v.object({
+  name: v.pipe(v.string(), v.minLength(2, 'Name must be at least 2 characters')),
+  email: v.pipe(v.string(), v.email('Please enter a valid email')),
+  age: v.pipe(v.number('Age must be a number'), v.integer(), v.minValue(18, 'Must be 18 or older')),
+  password: v.pipe(v.string(), v.minLength(8, 'Password must be at least 8 characters')),
+  confirmPassword: v.string()
 });
 
 export type UserSchema = typeof userSchema;
