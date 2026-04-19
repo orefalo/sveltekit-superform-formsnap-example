@@ -1,108 +1,80 @@
 <script lang="ts">
-  import { superForm, type SuperForm } from "sveltekit-superforms";
+  import { superForm } from "sveltekit-superforms";
   import { valibotClient } from "sveltekit-superforms/adapters";
-  import { userSchema, type UserSchema } from "$lib/schema";
+  import { Field, Control, Label, FieldErrors } from "formsnap";
+  import { userSchema } from "$lib/schema";
+  import type { PageData } from "./$types";
 
-  export let data: SuperForm<UserSchema>;
+  export let data: PageData;
 
-  const { form, errors, enhance, constraints, submitting, delayed } = superForm(
-    data.form,
-    {
-      validators: valibotClient(userSchema),
-      validationMethod: "oninput",
-      scrollToError: "smooth",
-      resetForm: true,
-      onUpdated({ form }) {
-        if (form.valid) {
-          alert("Form submitted successfully!");
-        }
-      },
+  const sf = superForm(data.form, {
+    validators: valibotClient(userSchema),
+    validationMethod: "oninput",
+    scrollToError: "smooth",
+    resetForm: true,
+    onUpdated({ form }) {
+      if (form.valid) {
+        alert("Form submitted successfully!");
+      }
     },
-  );
+  });
+
+  const { form, enhance, submitting, delayed } = sf;
 </script>
 
 <main>
   <h1>Register</h1>
 
   <form method="POST" use:enhance novalidate>
-    <!-- Name -->
-    <div class="field">
-      <label for="name">Name</label>
-      <input
-        id="name"
-        name="name"
-        type="text"
-        bind:value={$form.name}
-        aria-invalid={$errors.name ? "true" : undefined}
-        {...$constraints.name}
-      />
-      {#if $errors.name}
-        <span class="error">{$errors.name}</span>
-      {/if}
-    </div>
+    <Field form={sf} name="name">
+      <Control>
+        {#snippet children({ props })}
+          <Label>Name</Label>
+          <input type="text" bind:value={$form.name} {...props} />
+        {/snippet}
+      </Control>
+      <FieldErrors />
+    </Field>
 
-    <!-- Email -->
-    <div class="field">
-      <label for="email">Email</label>
-      <input
-        id="email"
-        name="email"
-        type="email"
-        bind:value={$form.email}
-        aria-invalid={$errors.email ? "true" : undefined}
-        {...$constraints.email}
-      />
-      {#if $errors.email}
-        <span class="error">{$errors.email}</span>
-      {/if}
-    </div>
+    <Field form={sf} name="email">
+      <Control>
+        {#snippet children({ props })}
+          <Label>Email</Label>
+          <input type="email" bind:value={$form.email} {...props} />
+        {/snippet}
+      </Control>
+      <FieldErrors />
+    </Field>
 
-    <!-- Age -->
-    <div class="field">
-      <label for="age">Age</label>
-      <input
-        id="age"
-        name="age"
-        type="number"
-        bind:value={$form.age}
-        aria-invalid={$errors.age ? "true" : undefined}
-        {...$constraints.age}
-      />
-      {#if $errors.age}
-        <span class="error">{$errors.age}</span>
-      {/if}
-    </div>
+    <Field form={sf} name="age">
+      <Control>
+        {#snippet children({ props })}
+          <Label>Age</Label>
+          <input type="number" bind:value={$form.age} {...props} />
+        {/snippet}
+      </Control>
+      <FieldErrors />
+    </Field>
 
-    <!-- Password -->
-    <div class="field">
-      <label for="password">Password</label>
-      <input
-        id="password"
-        name="password"
-        type="password"
-        bind:value={$form.password}
-        aria-invalid={$errors.password ? "true" : undefined}
-        {...$constraints.password}
-      />
-      {#if $errors.password}
-        <span class="error">{$errors.password}</span>
-      {/if}
-    </div>
+    <Field form={sf} name="password">
+      <Control>
+        {#snippet children({ props })}
+          <Label>Password</Label>
+          <input type="password" bind:value={$form.password} {...props} />
+        {/snippet}
+      </Control>
+      <FieldErrors />
+    </Field>
 
-    <!-- Confirm Password -->
-    <div class="field">
-      <label for="confirmPassword">Confirm Password</label>
-      <input
-        id="confirmPassword"
-        name="confirmPassword"
-        type="password"
-        bind:value={$form.confirmPassword}
-        aria-invalid={$errors.confirmPassword ? "true" : undefined}
-      />
-      {#if $errors.confirmPassword}
-        <span class="error">{$errors.confirmPassword}</span>
-      {/if}
-    </div>
+    <Field form={sf} name="confirmPassword">
+      <Control>
+        {#snippet children({ props })}
+          <Label>Confirm Password</Label>
+          <input type="password" bind:value={$form.confirmPassword} {...props} />
+        {/snippet}
+      </Control>
+      <FieldErrors />
+    </Field>
 
     <button type="submit" disabled={$submitting}>
       {$delayed ? "Submitting…" : "Submit"}
@@ -122,14 +94,14 @@
     margin-bottom: 1.5rem;
   }
 
-  .field {
+  :global([data-fs-field]) {
     display: flex;
     flex-direction: column;
     gap: 4px;
     margin-bottom: 1.25rem;
   }
 
-  label {
+  :global([data-fs-label]) {
     font-weight: 600;
     font-size: 0.9rem;
   }
@@ -145,7 +117,7 @@
     border-color: crimson;
   }
 
-  .error {
+  :global([data-fs-field-errors]) {
     color: crimson;
     font-size: 0.82rem;
   }

@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      formsnap:
+        specifier: ^2.0.1
+        version: 2.0.1(svelte@5.55.4)(sveltekit-superforms@2.30.1(@sveltejs/kit@2.57.1(@sveltejs/vite-plugin-svelte@7.0.0(svelte@5.55.4)(vite@8.0.8(@types/node@25.6.0)))(svelte@5.55.4)(typescript@6.0.3)(vite@8.0.8(@types/node@25.6.0)))(svelte@5.55.4)(typescript@6.0.3))
       sveltekit-superforms:
         specifier: ^2.30.1
         version: 2.30.1(@sveltejs/kit@2.57.1(@sveltejs/vite-plugin-svelte@7.0.0(svelte@5.55.4)(vite@8.0.8(@types/node@25.6.0)))(svelte@5.55.4)(typescript@6.0.3)(vite@8.0.8(@types/node@25.6.0)))(svelte@5.55.4)(typescript@6.0.3)
@@ -366,10 +369,20 @@ packages:
       picomatch:
         optional: true
 
+  formsnap@2.0.1:
+    resolution: {integrity: sha512-iJSe4YKd/W6WhLwKDVJU9FQeaJRpEFuolhju7ZXlRpUVyDdqFdMP8AUBICgnVvQPyP41IPAlBa/v0Eo35iE6wQ==}
+    engines: {node: '>=18', pnpm: '>=8.7.0'}
+    peerDependencies:
+      svelte: ^5.0.0
+      sveltekit-superforms: ^2.19.0
+
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
+
+  inline-style-parser@0.2.7:
+    resolution: {integrity: sha512-Nb2ctOyNR8DqQoR0OwRG95uNWIC0C1lCgf5Naz5H6Ji72KZ8OcFZLz2P5sNgwlyoJ8Yif11oMuYs5pBQa86csA==}
 
   is-reference@3.0.3:
     resolution: {integrity: sha512-ixkJoqQvAP88E6wLydLGGqCJsrFUnqoH6HnaczB8XmDH1oaWU+xxdptvikTgaEhtZ53Ky6YXiBuUI2WXLMCwjw==}
@@ -520,9 +533,18 @@ packages:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
     engines: {node: '>=0.10.0'}
 
+  style-to-object@1.0.14:
+    resolution: {integrity: sha512-LIN7rULI0jBscWQYaSswptyderlarFkjQ+t79nzty8tcIAceVomEVlLzH5VP4Cmsv6MtKhs7qaAiwlcp+Mgaxw==}
+
   superstruct@2.0.2:
     resolution: {integrity: sha512-uV+TFRZdXsqXTL2pRvujROjdZQ4RAlBUS5BTh9IGm+jTqQntYThciG/qu57Gs69yjnVUSqdxF9YLmSnpupBW9A==}
     engines: {node: '>=14.0.0'}
+
+  svelte-toolbelt@0.5.0:
+    resolution: {integrity: sha512-t3tenZcnfQoIeRuQf/jBU7bvTeT3TGkcEE+1EUr5orp0lR7NEpprflpuie3x9Dn0W9nOKqs3HwKGJeeN5Ok1sQ==}
+    engines: {node: '>=18', pnpm: '>=8.7.0'}
+    peerDependencies:
+      svelte: ^5.0.0-next.126
 
   svelte@5.55.4:
     resolution: {integrity: sha512-q8DFohk6vUswSng95IZb9nzWJnbINZsK7OiM1snAa3qCjJBL0ZQpvMyAaVXjUukdM75J/m8UE8xwqat8Ors/zQ==}
@@ -939,8 +961,16 @@ snapshots:
     optionalDependencies:
       picomatch: 4.0.4
 
+  formsnap@2.0.1(svelte@5.55.4)(sveltekit-superforms@2.30.1(@sveltejs/kit@2.57.1(@sveltejs/vite-plugin-svelte@7.0.0(svelte@5.55.4)(vite@8.0.8(@types/node@25.6.0)))(svelte@5.55.4)(typescript@6.0.3)(vite@8.0.8(@types/node@25.6.0)))(svelte@5.55.4)(typescript@6.0.3)):
+    dependencies:
+      svelte: 5.55.4
+      svelte-toolbelt: 0.5.0(svelte@5.55.4)
+      sveltekit-superforms: 2.30.1(@sveltejs/kit@2.57.1(@sveltejs/vite-plugin-svelte@7.0.0(svelte@5.55.4)(vite@8.0.8(@types/node@25.6.0)))(svelte@5.55.4)(typescript@6.0.3)(vite@8.0.8(@types/node@25.6.0)))(svelte@5.55.4)(typescript@6.0.3)
+
   fsevents@2.3.3:
     optional: true
+
+  inline-style-parser@0.2.7: {}
 
   is-reference@3.0.3:
     dependencies:
@@ -1079,8 +1109,18 @@ snapshots:
 
   source-map-js@1.2.1: {}
 
+  style-to-object@1.0.14:
+    dependencies:
+      inline-style-parser: 0.2.7
+
   superstruct@2.0.2:
     optional: true
+
+  svelte-toolbelt@0.5.0(svelte@5.55.4):
+    dependencies:
+      clsx: 2.1.1
+      style-to-object: 1.0.14
+      svelte: 5.55.4
 
   svelte@5.55.4:
     dependencies:
