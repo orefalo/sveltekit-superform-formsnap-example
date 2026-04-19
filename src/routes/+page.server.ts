@@ -11,6 +11,7 @@ export const load = async () => {
 
 export const actions: Actions = {
   default: async ({ request }) => {
+
     const form = await superValidate(request, valibot(userSchema));
 
     if (!form.valid) {

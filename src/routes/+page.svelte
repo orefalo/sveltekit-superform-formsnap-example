@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { superForm } from "sveltekit-superforms";
+  import { superForm, type SuperForm } from "sveltekit-superforms";
   import { valibotClient } from "sveltekit-superforms/adapters";
-  import { userSchema } from "$lib/schema";
+  import { userSchema, type UserSchema } from "$lib/schema";
 
-  export let data;
+  export let data: SuperForm<UserSchema>;
 
   const { form, errors, enhance, constraints, submitting, delayed } = superForm(
     data.form,
