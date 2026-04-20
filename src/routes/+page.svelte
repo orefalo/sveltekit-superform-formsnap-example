@@ -70,7 +70,11 @@
       <Control>
         {#snippet children({ props })}
           <Label>Confirm Password</Label>
-          <input type="password" bind:value={$form.confirmPassword} {...props} />
+          <input
+            type="password"
+            bind:value={$form.confirmPassword}
+            {...props}
+          />
         {/snippet}
       </Control>
       <FieldErrors />
